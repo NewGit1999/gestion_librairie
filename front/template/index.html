@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2>Dashboard</h2>
+            <ul>
+                <li><a href="#">Abonnes</a></li>
+                <li><a href="#">Livres</a></li>
+                <li><a href="#">Emprunts</a></li>
+            </ul>
+        </aside>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <h1>Gestion des Abonnes</h1>
+            <button id="addButton" class="add-btn">Ajouter</button>
+            
+            <!-- Table -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Email</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Jean Dupont</td>
+                        <td>jean.dupont@example.com</td>
+                        <td>
+                            <button class="edit-btn" onclick="editEntry()">Modifier</button>
+                            <button class="delete-btn" onclick="deleteEntry()">Supprimer</button>
+                        </td>
+                    </tr>
+                    <!-- Ajoutez d'autres lignes ici -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="../static/js/script.js"></script>
+</body>
+</html>
