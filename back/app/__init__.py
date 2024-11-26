@@ -14,7 +14,10 @@ def create_app():
     mongo = PyMongo(app)
 
     
-    from .routes import main
-    app.register_blueprint(main)
+    # from .routes import main
+    # app.register_blueprint(main)
+
+    from .routes import abonne_bp
+    app.register_blueprint(abonne_bp, url_prefix='/api')
 
     return app, mongo

@@ -29,20 +29,32 @@
                     <tr>
                         <th>ID</th>
                         <th>Nom</th>
-                        <th>Email</th>
+                        <th>Adresse</th>
+                        <th>Date inscription</th>
+                        <th>liste emprunts</th>
+                        <th>historique emprunts</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
+                    {% for abonne in abonnes %}
+
                     <tr>
-                        <td>1</td>
-                        <td>Jean Dupont</td>
-                        <td>jean.dupont@example.com</td>
+                        <td>{{abonne.nom}}</td>
+                        <td>{{abonne.prenom}}</td>
+                        <td>{{abonne.Adresse}}</td>
+                        <td>{{abonne.Date_dinscription}}</td>
+                        <td>{{abonne.Liste_emprunts_cours}}</td>
+                        <td>{{abonne.historique_emprunts}}</td>
+
+
                         <td>
                             <button class="edit-btn" onclick="editEntry()">Modifier</button>
                             <button class="delete-btn" onclick="deleteEntry()">Supprimer</button>
                         </td>
                     </tr>
+                    {% endfor %}
+
                     <!-- Ajoutez d'autres lignes ici -->
                 </tbody>
             </table>
