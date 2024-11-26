@@ -8,11 +8,21 @@ db = client["librairie"]
 # Blueprint pour les routes 'abonne'
 abonne_bp = Blueprint('abonnes', __name__)
 
-@abonne_bp.route('/abonne', methods=['POST'])
+@abonne_bp.route('/addabonne', methods=['POST'])
 def create_abonne():
-    data = request.json
+    data = {
+        "nom": request.form.get("nom"),
+        "prenom": request.form.get("prenom"),
+        
+        "Adresse": request.form.get("Adresse"),
+        "Liste_emprunts_cours": request.form.get("Liste_emprunts_courss"),
+        "historique_emprunts": request.form.get("historique_emprunts"),
+        "Date_dinscription": request.form.get("Date_dinscription")
+    }
+    # data = request.json
     db.abonnes.insert_one(data)
     return jsonify({"message": "Abonné créé avec succès !"}), 201
+    return redirect(url_for('/'))
 
 @abonne_bp.route('/abonne', methods=['GET'])
 def get_abonnes():
@@ -22,6 +32,8 @@ def get_abonnes():
 @abonne_bp.route('/abonne/<nom>', methods=['PUT'])
 def update_abonne(nom):
     data = request.json
+    if not data:
+        return jsonify({"error": "Aucune donnée fournie"}), 400
     db.abonnes.update_one({"nom": nom}, {"$set": data})
     return jsonify({"message": "Abonné mis à jour avec succès !"}), 200
 

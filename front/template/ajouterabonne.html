@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter un Abonné</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2>Dashboard</h2>
+            <ul>
+                <li><a href="/">Abonnés</a></li>
+                <li><a href="/livres">Livres</a></li>
+                <li><a href="/emprunts">Emprunts</a></li>
+                <li><a href="/addabonne">Ajouter un Abonné</a></li>
+                <li><a href="/addLivre">Ajouter un Livre</a></li>
+                <li><a href="/addEmprunt">Ajouter un Emprunt</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <h1>Ajouter un Abonné</h1>
+            <form id="addAbonneForm" action="/addabonne" method="POST">
+                <div class="form-group">
+                    <label for="nom">Nom :</label>
+                    <input type="text" id="nom" name="nom" placeholder="Entrez le nom" required>
+                </div>
+                <div class="form-group">
+                    <label for="prenom">Prenom :</label>
+                    <input type="text" id="prenom" name="prenom" placeholder="Entrez le prenom" required>
+                </div>
+                <div class="form-group">
+                    <label for="adresse">Adresse :</label>
+                    <input type="text" id="Adresse" name="Adresse" placeholder="Entrez l'adresse" required>
+                </div>
+                <div class="form-group">
+                    <label for="date_inscription">Date d'inscription :</label>
+                    <input type="date" id="date_inscription" name="Date_dinscription" required>
+                </div>
+                <div class="form-group">
+                    <label for="liste_emprunts">Liste des emprunts en cours :</label>
+                    <textarea id="liste_emprunts" name="Liste_emprunts_cours" placeholder="Liste des emprunts en cours"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="historique_emprunts">Historique des emprunts :</label>
+                    <textarea id="historique_emprunts" name="historique_emprunts" placeholder="Historique des emprunts"></textarea>
+                </div>
+                <button type="submit" class="add-btn">Ajouter</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="../static/js/script.js"></script>
+</body>
+</html>
