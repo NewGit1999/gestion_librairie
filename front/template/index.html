@@ -53,7 +53,12 @@
 
                         <td>
                             <button class="edit-btn" onclick="editEntry()">Modifier</button>
-                            <button class="delete-btn" onclick="deleteEntry()">Supprimer</button>
+                            <form action="{{ url_for('delete_abonne', nom=abonne.nom) }}" method="POST" style="display:inline;">
+                                <button type="submit" class="delete-button">
+                                    <span class="material-symbols-sharp" style="font-size: 1.5rem; padding-top:.2rem; padding-left:.1rem">delete</span>
+                                    <h3>Supprimer</h3> 
+                                </button>
+                            </form>                        
                         </td>
                     </tr>
                     {% endfor %}

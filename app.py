@@ -36,6 +36,18 @@ def addAbonnees():
 
      return render_template('ajouterabonne.html')
 
+@app.route('/delete_abonne/<nom>', methods=['POST'])
+def delete_abonne(nom):
+    # Tenter de supprimer l'abonné
+    result = db.abonnes.delete_one({"nom": nom})
+    
+    # Vérifier si l'abonné existait
+    if result.deleted_count == 0:
+        return "Abonne introuvable", 404
+
+    # Rediriger vers la liste des abonnés après suppression
+    return redirect(url_for('home'))
+
 
 if __name__ == "__main__":
     

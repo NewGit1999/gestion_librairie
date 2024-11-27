@@ -9,8 +9,8 @@ function editEntry() {
 }
 
 // Fonction pour supprimer une entrée
-function deleteEntry() {
-    if (confirm("Voulez-vous vraiment supprimer cet abonné ?")) {
-        alert("Abonné supprimé !");
-    }
-}
+// function deleteEntry() {
+//     if (confirm("Voulez-vous vraiment supprimer cet abonné ?")) {
+//         alert("Abonné supprimé !");
+//     }
+// }
