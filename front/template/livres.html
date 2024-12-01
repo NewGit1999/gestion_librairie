@@ -29,41 +29,41 @@
         
         <!-- Main Content -->
         <div class="main-content">
-            <h1>Gestion des Abonnes</h1>
+            <h1>Gestion des Livres</h1>
             
             
             <!-- Table -->
             <table>
                 <thead>
                     <tr>
-                        <th>Nom</th>
-                        <th>Prenom</th>
-                        <th>Adresse</th>
-                        <th>Date inscription</th>
-                        <th>liste emprunts</th>
-                        <th>historique emprunts</th>
+                        <th>Titre</th>
+                        <th>Type</th>
+                        <th>Auteur</th>
+                        <th>Date de publication</th>
+                        <th>Disponibilité</th>
+                        
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for abonne in abonnes %}
+                    {% for livre in livres %}
 
                     <tr>
-                        <td>{{abonne.nom}}</td>
-                        <td>{{abonne.prenom}}</td>
-                        <td>{{abonne.Adresse}}</td>
-                        <td>{{abonne.Date_dinscription}}</td>
-                        <td>{{abonne.Liste_emprunts_cours}}</td>
-                        <td>{{abonne.historique_emprunts}}</td>
+                        <td>{{livre.titre}}</td>
+                        <td>{{livre.type}}</td>
+                        <td>{{livre.Auteur}}</td>
+                        <td>{{livre.Date_publication}}</td>
+                        <td>{{livre.Disponibilite}}</td>
+                        
 
 
                         <td>
 
-                            <button class="edit-btn" data-bs-toggle="modal" data-bs-target="#editModal{{ abonne.nom }}">
+                            <button class="edit-btn" data-bs-toggle="modal" data-bs-target="#editModal{{ livre.titre }}">
                                 <i class="fas fa-edit"></i>
                               </button>
                             
-                            <form action="{{ url_for('delete_abonne', nom=abonne.nom) }}" method="POST" style="display:inline;">
+                            
                                 <button type="submit" class="delete-button">
                                     <h3>Supprimer</h3> 
                                 </button>

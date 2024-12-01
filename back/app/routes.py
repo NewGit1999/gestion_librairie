@@ -5,6 +5,7 @@ from pymongo import MongoClient
 client = MongoClient("mongodb://localhost:27017/")
 db = client["librairie"]
 
+#ABONNES
 # Blueprint pour les routes 'abonne'
 abonne_bp = Blueprint('abonnes', __name__)
 
@@ -41,3 +42,27 @@ def update_abonne(nom):
 def delete_abonne(nom):
     db.abonnes.delete_one({"nom": nom})
     return jsonify({"message": "Abonné supprimé avec succès !"}), 200
+
+#LIVRES
+
+livre_bp = Blueprint('livres', __name__)
+@abonne_bp.route('/addLivre', methods=['POST'])
+def create_abonne():
+    data = {
+        "titre": request.form.get("titre"),
+        "type": request.form.get("type"),
+        
+        "Auteur": request.form.get("Auteur"),
+        "Date_publication": request.form.get("Date_publication"),
+        "Disponibilite": request.form.get("Disponibilite"),
+        
+    }
+    # data = request.json
+    db.livres.insert_one(data)
+    return jsonify({"message": "Livre créé avec succès !"}), 201
+    return redirect(url_for('/livres'))
+
+@livre_bp.route('/livre', methods=['GET'])
+def get_livres():
+    livres = list(db.livres.find({}, {"_id": 0}))
+    return jsonify(livres), 200

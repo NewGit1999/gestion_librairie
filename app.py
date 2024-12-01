@@ -8,6 +8,8 @@ app = Flask(__name__, static_folder='front/static', template_folder='front/templ
 client = MongoClient("mongodb://localhost:27017/")
 db = client["librairie"]
 
+#ABONNES
+
 @app.route('/')
 def home():
      # return render_template('index.html')
@@ -75,6 +77,37 @@ def update_abonne(nom):
     )
 
     return redirect(url_for('home'))  # Redirige vers la liste des abonnés
+
+    #LIVRES
+
+@app.route('/livres')
+def livres():
+    livres = list(db.livres.find({}, {"_id": 0})) 
+    return render_template('livres.html', livres=livres)
+
+@app.route('/addLivre', methods=[ 'GET','POST'])
+def addLivres():
+     if request.method == 'POST':
+        # Récupérer les données du formulaire
+        titre = request.form['titre']
+        type = request.form['type']
+        Auteur = request.form['Auteur']
+        Date_publication = request.form['Date_publication']
+        Disponibilite = request.form['Disponibilite']
+        
+
+        db.livres.insert_one({
+          'titre': titre,
+          'type': type,
+          'Auteur': Auteur,
+          'Date_publication': Date_publication,
+          'Disponibilite': Disponibilite,
+          })
+        return redirect(url_for('livres'))
+
+     return render_template('ajouterlivre.html')
+
+
 
 
 if __name__ == "__main__":
