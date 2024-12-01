@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 from pymongo import MongoClient
 
 
@@ -47,6 +47,34 @@ def delete_abonne(nom):
 
     # Rediriger vers la liste des abonnés après suppression
     return redirect(url_for('home'))
+
+@app.route('/update_abonne/<nom>', methods=['POST'])
+def update_abonne(nom):
+    nom = request.form.get('nom')
+    prenom = request.form.get('prenom')
+    Adresse = request.form.get('Adresse')
+    Liste_emprunts_cours = request.form.get('Liste_emprunts_cours')
+    historique_emprunts = request.form.get('historique_emprunts')
+    Date_dinscription = request.form.get('Date_dinscription')
+
+    abonne = db.abonnes.find_one({"nom": nom})
+    
+    if not abonne:
+        return jsonify({"error": "Abonné introuvable"}), 404
+
+    db.abonnes.update_one(
+        {"nom": nom},
+        {"$set": {
+            "nom": nom,
+            "prenom": prenom,
+            "adresse": adresse,
+            "Liste_emprunts_cours": Liste_emprunts_cours,
+            "historique_emprunts": historique_emprunts,
+            "Date_dinscription": Date_dinscription
+        }}
+    )
+
+    return redirect(url_for('home'))  # Redirige vers la liste des abonnés
 
 
 if __name__ == "__main__":

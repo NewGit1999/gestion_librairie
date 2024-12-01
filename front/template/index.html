@@ -4,20 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <link rel="stylesheet" href="../static/css/style.css">
 </head>
 <body>
     <div class="dashboard-container">
         <!-- Sidebar -->
         <aside class="sidebar">
-            <h2>Dashboard</h2>
+          <div class="logo">
+            <i class="fas fa-book fa-3x"></i>
+            <h2>BiblioFlux</h2>
+        </div>
+            
             <ul>
-                <li><a href="/">Abonnés</a></li>
-                <li><a href="/livres">Livres</a></li>
-                <li><a href="/emprunts">Emprunts</a></li>
-                <li><a href="/addabonne">Ajouter un Abonné</a></li>
-                <li><a href="/addLivre">Ajouter un Livre</a></li>
-                <li><a href="/addEmprunt">Ajouter un Emprunt</a></li>
+              <li><a href="/"><i class="fas fa-user"></i> Abonnés</a></li>
+              <li><a href="/livres"><i class="fas fa-book"></i> Livres</a></li>
+              <li><a href="/emprunts"><i class="fas fa-handshake"></i> Emprunts</a></li>
+              <li><a href="/addabonne"><i class="fas fa-user-plus"></i> Ajouter un Abonné</a></li>
+              <li><a href="/addLivre"><i class="fas fa-plus-square"></i> Ajouter un Livre</a></li>
+              <li><a href="/addEmprunt"><i class="fas fa-plus-circle"></i> Ajouter un Emprunt</a></li>
             </ul>
         </aside>
         
@@ -52,15 +58,64 @@
 
 
                         <td>
-                            <button class="edit-btn" onclick="editEntry()">Modifier</button>
+
+                            <button class="edit-btn" data-bs-toggle="modal" data-bs-target="#editModal{{ abonne.nom }}">
+                                <i class="fas fa-edit"></i>
+                              </button>
+                            
                             <form action="{{ url_for('delete_abonne', nom=abonne.nom) }}" method="POST" style="display:inline;">
                                 <button type="submit" class="delete-button">
-                                    <span class="material-symbols-sharp" style="font-size: 1.5rem; padding-top:.2rem; padding-left:.1rem">delete</span>
                                     <h3>Supprimer</h3> 
                                 </button>
-                            </form>                        
+                            </form>
+                            
+                            
+                            
+                            
                         </td>
                     </tr>
+
+                    <!-- Modal pour modifier l'abonné -->
+                  <div class="modal fade" id="editModal{{ abonne.nom }}" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">Modifier l'abonné</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <form id="editAbonneForm" method="POST" action="/update_abonne/{{ abonne.nom }}">
+                            <div class="mb-3">
+                              <label for="prenom" class="form-label">Prenom</label>
+                              <input type="text" class="form-control" id="prenom" name="prenom" value="{{ abonne.prenom }}" required>
+                            </div>
+                            <div class="mb-3">
+                              <label for="prenom" class="form-label">Adresse</label>
+                              <input type="text" class="form-control" id="Adresse" name="Adresse" value="{{ abonne.Adresse }}" required>
+                            </div>
+                            <div class="mb-3">
+                              <label for="Date_dinscription" class="form-label">Date inscription</label>
+                              <input type="Date" class="form-control" id="Date_dinscription" name="Date_dinscription" value="{{ abonne.Date_dinscription }}" required>
+                            </div>
+							<div class="mb-3">
+                              <label for="historique_emprunts" class="form-label">Historique inscription</label>
+                              <input type="text" class="form-control" id="historique_emprunts" name="historique_emprunts" value="{{ abonne.historique_emprunts }}" required>
+                            </div>
+							<div class="mb-3">
+                              <label for="Liste_emprunts_cours" class="form-label">Liste emprunts</label>
+                              <input type="text" class="form-control" id="Liste_emprunts_cours" name="Liste_emprunts_cours" value="{{ abonne.Liste_emprunts_cours }}" required>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                              <button type="submit" class="btn btn-primary">Mettre à jour</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
                     {% endfor %}
 
                     <!-- Ajoutez d'autres lignes ici -->
@@ -68,6 +123,9 @@
             </table>
         </div>
     </div>
+
+    
+
 
     <script src="../static/js/script.js"></script>
 </body>
