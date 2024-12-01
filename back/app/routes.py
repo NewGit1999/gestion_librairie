@@ -71,3 +71,7 @@ def get_livres():
 def delete_livre(titre):
     db.livres.delete_one({"titre": titre})
     return jsonify({"message": "Livre supprimé avec succès !"}), 200
+
+    #EMPRUNTS
+
+emprunt_bp = Blueprint('emprunts', __name__)

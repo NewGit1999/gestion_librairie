@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+          <div class="logo">
+            <i class="fas fa-book fa-3x"></i>
+            <h2>BiblioFlux</h2>
+        </div>
+            
+            <ul>
+              <li><a href="/"><i class="fas fa-user"></i> Abonnés</a></li>
+              <li><a href="/livres"><i class="fas fa-book"></i> Livres</a></li>
+              <li><a href="/emprunts"><i class="fas fa-handshake"></i> Emprunts</a></li>
+              <li><a href="/addabonne"><i class="fas fa-user-plus"></i> Ajouter un Abonné</a></li>
+              <li><a href="/addLivre"><i class="fas fa-plus-square"></i> Ajouter un Livre</a></li>
+              <li><a href="/addEmprunt"><i class="fas fa-plus-circle"></i> Ajouter un Emprunt</a></li>
+            </ul>
+        </aside>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <h1>Gestion des Emprunts</h1>
+
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Rechercher un emprunt..." class="search-bar">
+                
+            </div>
+              
+            
+            
+            <!-- Table -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>Abonne</th>
+                        <th>Document Emprunte</th>
+                        <th>Date emprunt</th>
+                        <th>Date_retour_prevue</th>
+                        <th>Disponibilité</th>
+                        
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="empruntsTable">
+                    {% for emprunt in emprunts %}
+
+                    <tr>
+                        <td>{{emprunt.abonne}}</td>
+                        <td>{{emprunt.Document_emprunte}}</td>
+                        <td>{{emprunt.Date_emprunt}}</td>
+                        <td>{{emprunt.Date_retour_prevue}}</td>
+                        <td>{{emprunt.statut_emprunts}}</td>
+                        
+
+
+                        <td>
+
+                            <button class="edit-btn" data-bs-toggle="modal" >
+                                <i class="fas fa-edit"></i>
+                              </button>
+                            
+                            
+                                
+                                <button type="submit" class="delete-button">
+                                    <h3>Supprimer</h3> 
+                                </button>
+                            </form>
+
+                            
+
+                            
+                            
+                            
+                            
+                            
+                        </td>
+                    </tr>
+
+                    
+
+
+                    {% endfor %}
+
+                    <!-- Ajoutez d'autres lignes ici -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    
+
+    <script src="../static/js/script.js"></script>
+</body>
+</html>

@@ -23,4 +23,7 @@ def create_app():
     from .routes import livre_bp
     app.register_blueprint(livre_bp, url_prefix='/api')
 
+    from .routes import emprunt_bp
+    app.register_blueprint(emprunt_bp, url_prefix='/api')
+
     return app, mongo

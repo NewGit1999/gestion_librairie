@@ -120,6 +120,15 @@ def delete_livre(titre):
     return redirect(url_for('livres'))
 
 
+    #EMPRUNTS
+@app.route('/emprunts')
+def emprunts():
+    emprunts = list(db.emprunts.find({}, {"_id": 0})) 
+    return render_template('emprunts.html', emprunts=emprunts)
+
+
+
+
 
 
 if __name__ == "__main__":

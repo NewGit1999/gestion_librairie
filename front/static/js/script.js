@@ -70,3 +70,15 @@ document.getElementById('searchInput').addEventListener('input', function() {
     });
 });
 
+//barre de recherche emprunt
+document.getElementById('searchInput').addEventListener('input', function() {
+    const filter = this.value.toLowerCase();
+    const rows = document.querySelectorAll('#empruntsTable tr');
+
+    rows.forEach(row => {
+        const cells = Array.from(row.cells);
+        const matches = cells.some(cell => cell.textContent.toLowerCase().includes(filter));
+        row.style.display = matches ? '' : 'none';
+    });
+});
+
