@@ -43,3 +43,30 @@ window.onclick = function(event) {
         closeModal();
     }
 }
+
+
+
+//barre de rechrche abonne
+document.getElementById('searchInput').addEventListener('input', function() {
+    const filter = this.value.toLowerCase();
+    const rows = document.querySelectorAll('#abonnesTable tr');
+
+    rows.forEach(row => {
+        const cells = Array.from(row.cells);
+        const matches = cells.some(cell => cell.textContent.toLowerCase().includes(filter));
+        row.style.display = matches ? '' : 'none';
+    });
+});
+
+//barre de recherche livre
+document.getElementById('searchInput').addEventListener('input', function() {
+    const filter = this.value.toLowerCase();
+    const rows = document.querySelectorAll('#livresTable tr');
+
+    rows.forEach(row => {
+        const cells = Array.from(row.cells);
+        const matches = cells.some(cell => cell.textContent.toLowerCase().includes(filter));
+        row.style.display = matches ? '' : 'none';
+    });
+});
+

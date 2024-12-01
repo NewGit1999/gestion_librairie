@@ -30,6 +30,12 @@
         <!-- Main Content -->
         <div class="main-content">
             <h1>Gestion des Livres</h1>
+
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Rechercher un livre..." class="search-bar">
+                
+            </div>
+              
             
             
             <!-- Table -->
@@ -45,7 +51,7 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="livresTable">
                     {% for livre in livres %}
 
                     <tr>

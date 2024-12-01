@@ -179,3 +179,13 @@ button.delete-button:hover {
 button.delete-button span {
     margin-right: 5px;
 }
+
+/*barre de rechrche*/
+.search-bar {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}

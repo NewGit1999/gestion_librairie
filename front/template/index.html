@@ -30,6 +30,11 @@
         <!-- Main Content -->
         <div class="main-content">
             <h1>Gestion des Abonnes</h1>
+
+            <div class="search-container">
+              <input type="text" id="searchInput" placeholder="Rechercher un abonné..." class="search-bar">
+              
+          </div>
             
             
             <!-- Table -->
@@ -45,7 +50,7 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="abonnesTable">
                     {% for abonne in abonnes %}
 
                     <tr>
