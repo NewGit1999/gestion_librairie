@@ -107,6 +107,18 @@ def addLivres():
 
      return render_template('ajouterlivre.html')
 
+@app.route('/delete_livre/<titre>', methods=['POST'])
+def delete_livre(titre):
+    # Tenter de supprimer l'abonné
+    result = db.livres.delete_one({"titre": titre})
+    
+    # Vérifier si l'abonné existait
+    if result.deleted_count == 0:
+        return "Livre introuvable", 404
+
+    # Rediriger vers la liste des abonnés après suppression
+    return redirect(url_for('livres'))
+
 
 
 

@@ -66,3 +66,8 @@ def create_abonne():
 def get_livres():
     livres = list(db.livres.find({}, {"_id": 0}))
     return jsonify(livres), 200
+
+@livre_bp.route('/livre/<titre>', methods=['DELETE'])
+def delete_livre(titre):
+    db.livres.delete_one({"titre": titre})
+    return jsonify({"message": "Livre supprimé avec succès !"}), 200
