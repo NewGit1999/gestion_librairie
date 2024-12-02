@@ -75,3 +75,26 @@ def delete_livre(titre):
     #EMPRUNTS
 
 emprunt_bp = Blueprint('emprunts', __name__)
+@abonne_bp.route('/addLivre', methods=['POST'])
+def create_emprunt():
+    data = {
+        abonne_nom_prenom = request.form['abonne']
+        Document_emprunte = request.form['Document_emprunte']
+        Date_emprunt = request.form['Date_emprunt']
+        Date_retour_prevue = request.form['Date_retour_prevue']
+        statut_emprunts = request.form['statut_emprunts']
+
+        nom, prenom = abonne_nom_prenom.split(' ')
+
+        abonne = db.abonnes.find_one({'nom': nom, 'prenom': prenom})
+        livre = db.livres.find_one({'titre': Document_emprunte})
+    }
+    # data = request.json
+    db.livres.insert_one(data)
+    return jsonify({"message": "Emprunt créé avec succès !"}), 201
+    return redirect(url_for('/emprunts'))
+
+@emprunt_bp.route('/emprunts', methods=['GET'])
+def get_livres():
+    emprunts = list(db.emprunts.find({}, {"_id": 0}))
+    return jsonify(emprunts), 200

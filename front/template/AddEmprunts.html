@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter un Emprunt</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-book fa-3x"></i>
+                <h2>BiblioFlux</h2>
+            </div>
+            
+            <ul>
+                <li><a href="/"><i class="fas fa-user"></i> Abonnés</a></li>
+                <li><a href="/livres"><i class="fas fa-book"></i> Livres</a></li>
+                <li><a href="/emprunts"><i class="fas fa-handshake"></i> Emprunts</a></li>
+                <li><a href="/addabonne"><i class="fas fa-user-plus"></i> Ajouter un Abonné</a></li>
+                <li><a href="/addLivre"><i class="fas fa-plus-square"></i> Ajouter un Livre</a></li>
+                <li><a href="/addEmprunt"><i class="fas fa-plus-circle"></i> Ajouter un Emprunt</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <h1>Ajouter un Emprunt</h1>
+            <form id="addEmpruntForm" action="/addEmprunt" method="POST">
+                <div>
+                    <label for="abonne">Nom et Prénom de l'Abonné:</label>
+                    <select name="abonne" id="abonne" required>
+                        {% for abonne in abonnes %}
+                            <option value="{{ abonne.nom }} {{ abonne.prenom }}">{{ abonne.nom }} {{ abonne.prenom }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            
+                <div>
+                    <label for="Document_emprunte">Document Emprunté:</label>
+                    <select name="Document_emprunte" id="Document_emprunte" required>
+                        {% for livre in livres %}
+                            <option value="{{ livre.titre }}">{{ livre.titre }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            
+                <div>
+                    <label for="Date_emprunt">Date d'Emprunt:</label>
+                    <input type="date" name="Date_emprunt" id="Date_emprunt" required>
+                </div>
+            
+                <div>
+                    <label for="Date_retour_prevue">Date de Retour Prévue:</label>
+                    <input type="date" name="Date_retour_prevue" id="Date_retour_prevue" required>
+                </div>
+            
+                <div>
+                    <label for="statut_emprunts">Statut de l'Emprunt:</label>
+                    <select name="statut_emprunts" id="statut_emprunts" required>
+                        <option value="En cours">En cours</option>
+                        <option value="Retourne">Retourne</option>
+                        <option value="En retard">En retard</option>
+                    </select>
+                </div>
+            
+                <div>
+                    <button type="submit">Ajouter l'Emprunt</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../static/js/script.js"></script>
+</body>
+</html>

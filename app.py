@@ -69,7 +69,7 @@ def update_abonne(nom):
         {"$set": {
             "nom": nom,
             "prenom": prenom,
-            "adresse": adresse,
+            "Adresse": Adresse,
             "Liste_emprunts_cours": Liste_emprunts_cours,
             "historique_emprunts": historique_emprunts,
             "Date_dinscription": Date_dinscription
@@ -126,6 +126,36 @@ def emprunts():
     emprunts = list(db.emprunts.find({}, {"_id": 0})) 
     return render_template('emprunts.html', emprunts=emprunts)
 
+@app.route('/addEmprunt', methods=['GET', 'POST'])
+def addEmprunt():
+    if request.method == 'POST':
+        # Récupérer les données du formulaire
+        abonne_nom_prenom = request.form['abonne']
+        Document_emprunte = request.form['Document_emprunte']
+        Date_emprunt = request.form['Date_emprunt']
+        Date_retour_prevue = request.form['Date_retour_prevue']
+        statut_emprunts = request.form['statut_emprunts']
+
+        nom, prenom = abonne_nom_prenom.split(' ')
+
+        abonne = db.abonnes.find_one({'nom': nom, 'prenom': prenom})
+        livre = db.livres.find_one({'titre': Document_emprunte})
+
+        db.emprunts.insert_one({
+            'abonne': f"{nom} {prenom}",
+            'Document_emprunte': Document_emprunte,
+            'Date_emprunt': Date_emprunt,
+            'Date_retour_prevue': Date_retour_prevue,
+            'statut_emprunts': statut_emprunts,
+        })
+
+        return redirect(url_for('emprunts'))
+
+   
+    abonnes = list(db.abonnes.find({}, {"_id": 0, "nom": 1, "prenom": 1}))
+    livres = list(db.livres.find({}, {"_id": 0, "titre": 1}))
+    return render_template('AddEmprunts.html', abonnes=abonnes, livres=livres)
+    
 
 
 
