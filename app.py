@@ -119,6 +119,35 @@ def delete_livre(titre):
     # Rediriger vers la liste des abonnés après suppression
     return redirect(url_for('livres'))
 
+@app.route('/update_livre/<titre>', methods=['POST'])
+def update_livre(titre):
+    #nom = request.form.get('nom')
+    #titre = request.form.get('titre')
+    type = request.form.get('type')
+    Auteur = request.form.get('Auteur')
+    Date_publication = request.form.get('Date_publication')
+    Disponibilite = request.form.get('Disponibilite')
+
+    livre = db.livres.find_one({"titre": titre})
+    
+    if not livre:
+        return jsonify({"error": "Livre introuvable"}), 404
+
+    db.livres.update_one(
+        {"titre": titre},
+        {"$set": {
+            #"nom": nom,
+            "type": type,
+            "Auteur": Auteur,
+            "Date_publication": Date_publication,
+            "Disponibilite": Disponibilite,
+            #"Date_dinscription": Date_dinscription
+        }}
+    )
+
+    return redirect(url_for('livres'))  # Redirige vers la liste des abonnés
+
+
 
     #EMPRUNTS
 @app.route('/emprunts')

@@ -71,6 +71,13 @@ def get_livres():
 def delete_livre(titre):
     db.livres.delete_one({"titre": titre})
     return jsonify({"message": "Livre supprimé avec succès !"}), 200
+@livre_bp.route('/livre/<titre>', methods=['PUT'])
+def update_livre(titre):
+    data = request.json
+    if not data:
+        return jsonify({"error": "Aucune donnée fournie"}), 400
+    db.livres.update_one({"titre": titre}, {"$set": data})
+    return jsonify({"message": "Livre mis à jour avec succès !"}), 200
 
     #EMPRUNTS
 
@@ -98,7 +105,7 @@ def create_emprunt():
 def get_livres():
     emprunts = list(db.emprunts.find({}, {"_id": 0}))
     return jsonify(emprunts), 200
-    
+
 @emprunt_bp.route('/emprunt/<Date_emprunt>', methods=['DELETE'])
 def delete_emprunt(Date_emprunt):
     db.emprunts.delete_one({"Date_emprunt": Date_emprunt})
