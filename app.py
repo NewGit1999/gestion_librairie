@@ -52,7 +52,7 @@ def delete_abonne(nom):
 
 @app.route('/update_abonne/<nom>', methods=['POST'])
 def update_abonne(nom):
-    nom = request.form.get('nom')
+    #nom = request.form.get('nom')
     prenom = request.form.get('prenom')
     Adresse = request.form.get('Adresse')
     Liste_emprunts_cours = request.form.get('Liste_emprunts_cours')
@@ -67,7 +67,7 @@ def update_abonne(nom):
     db.abonnes.update_one(
         {"nom": nom},
         {"$set": {
-            "nom": nom,
+            #"nom": nom,
             "prenom": prenom,
             "Adresse": Adresse,
             "Liste_emprunts_cours": Liste_emprunts_cours,
