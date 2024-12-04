@@ -30,7 +30,7 @@
         <div class="main-content">
             <h1>Ajouter un Emprunt</h1>
             <form id="addEmpruntForm" action="/addEmprunt" method="POST">
-                <div>
+                <div class="form-group">
                     <label for="abonne">Nom et Prénom de l'Abonné:</label>
                     <select name="abonne" id="abonne" required>
                         {% for abonne in abonnes %}
@@ -39,7 +39,7 @@
                     </select>
                 </div>
             
-                <div>
+                <div class="form-group">
                     <label for="Document_emprunte">Document Emprunté:</label>
                     <select name="Document_emprunte" id="Document_emprunte" required>
                         {% for livre in livres %}
@@ -48,17 +48,17 @@
                     </select>
                 </div>
             
-                <div>
+                <div class="form-group">
                     <label for="Date_emprunt">Date d'Emprunt:</label>
                     <input type="date" name="Date_emprunt" id="Date_emprunt" required>
                 </div>
             
-                <div>
+                <div class="form-group">
                     <label for="Date_retour_prevue">Date de Retour Prévue:</label>
                     <input type="date" name="Date_retour_prevue" id="Date_retour_prevue" required>
                 </div>
             
-                <div>
+                <div class="form-group">
                     <label for="statut_emprunts">Statut de l'Emprunt:</label>
                     <select name="statut_emprunts" id="statut_emprunts" required>
                         <option value="En cours">En cours</option>
@@ -68,7 +68,7 @@
                 </div>
             
                 <div>
-                    <button type="submit">Ajouter l'Emprunt</button>
+                    <button class="add-btn" type="submit">Ajouter l'Emprunt</button>
                 </div>
             </form>
         </div>

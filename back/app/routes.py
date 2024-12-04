@@ -98,3 +98,8 @@ def create_emprunt():
 def get_livres():
     emprunts = list(db.emprunts.find({}, {"_id": 0}))
     return jsonify(emprunts), 200
+    
+@emprunt_bp.route('/emprunt/<Date_emprunt>', methods=['DELETE'])
+def delete_emprunt(Date_emprunt):
+    db.emprunts.delete_one({"Date_emprunt": Date_emprunt})
+    return jsonify({"message": "Emprunt supprimé avec succès !"}), 200
