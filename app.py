@@ -182,7 +182,7 @@ def addEmprunt():
 
    
     abonnes = list(db.abonnes.find({}, {"_id": 0, "nom": 1, "prenom": 1}))
-    livres = list(db.livres.find({}, {"_id": 0, "titre": 1}))
+    livres = list(db.livres.find({"Disponibilite": "Oui"}, {"_id": 0, "titre": 1}))
     return render_template('AddEmprunts.html', abonnes=abonnes, livres=livres)
 
 @app.route('/delete_emprunt/<Date_emprunt>', methods=['POST'])
@@ -196,6 +196,8 @@ def delete_emprunt(Date_emprunt):
 
     # Rediriger vers la liste des abonnés après suppression
     return redirect(url_for('emprunts'))
+
+
     
 
 
