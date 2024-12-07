@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 from pymongo import MongoClient
+from datetime import datetime
 
 
 # Initialisation de Flask
@@ -152,6 +153,8 @@ def update_livre(titre):
     #EMPRUNTS
 @app.route('/emprunts')
 def emprunts():
+    
+
     emprunts = list(db.emprunts.find({}, {"_id": 0})) 
     return render_template('emprunts.html', emprunts=emprunts)
 

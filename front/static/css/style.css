@@ -164,21 +164,30 @@ button.edit-btn:hover {
 button.delete-button {
     background-color: #e74c3c;
     color: white;
-    padding: 8px 12px;
+    padding: 10px;
     border: none;
     cursor: pointer;
     border-radius: 5px;
-    display: flex;
+    /* display: flex; */
+    /* align-items: center; */
+     /* Utilisation du border-radius pour un cercle */
+    display: inline-flex; /* Utilisation de flexbox pour centrer l'icône */
     align-items: center;
+    justify-content: center;  
 }
+
+
 
 button.delete-button:hover {
     background-color: #c0392b;
 }
-
-button.delete-button span {
-    margin-right: 5px;
+button.delete-button:hover i {
+    color: #fff; /* Garder l'icône blanche au survol */
 }
+
+/* button.delete-button span {
+    margin-right: 5px;
+} */
 
 /*barre de rechrche*/
 .search-bar {
