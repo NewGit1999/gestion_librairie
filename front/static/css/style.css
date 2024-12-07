@@ -161,28 +161,24 @@ button.edit-btn:hover {
     background-color: #45a049;
 }
 
-button.delete-button {
-    background-color: #e74c3c;
-    color: white;
-    padding: 10px;
+/* Bouton de suppression */
+button.delete-btn {
+    background-color: transparent;
     border: none;
     cursor: pointer;
-    border-radius: 5px;
-    /* display: flex; */
-    /* align-items: center; */
-     /* Utilisation du border-radius pour un cercle */
-    display: inline-flex; /* Utilisation de flexbox pour centrer l'icône */
-    align-items: center;
-    justify-content: center;  
+    color: red;
+    font-size: 20px;
 }
 
-
-
-button.delete-button:hover {
-    background-color: #c0392b;
+button.delete-btn:hover {
+    color: darkred;
 }
-button.delete-button:hover i {
-    color: #fff; /* Garder l'icône blanche au survol */
+
+button.delete-btn i {
+    font-size: 20px;
+    padding: 5px;
+    border: 2px solid red;
+    border-radius: 50%;
 }
 
 /* button.delete-button span {

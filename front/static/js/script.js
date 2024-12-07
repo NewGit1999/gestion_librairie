@@ -82,3 +82,17 @@ document.getElementById('searchInput').addEventListener('input', function() {
     });
 });
 
+
+    // Lorsque le bouton de suppression est cliqué, on met à jour l'URL du formulaire
+    const deleteButtons = document.querySelectorAll('.delete-btn');
+
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const url = button.getAttribute('data-href');
+            const deleteForm = document.getElementById('deleteForm');
+            deleteForm.setAttribute('action', url);
+        });
+    });
+
+
+
