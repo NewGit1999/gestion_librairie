@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask import Flask, render_template, request, redirect, url_for, jsonify, session
 from pymongo import MongoClient
 from datetime import datetime
 
@@ -9,13 +9,33 @@ app = Flask(__name__, static_folder='front/static', template_folder='front/templ
 client = MongoClient("mongodb://localhost:27017/")
 db = client["librairie"]
 
+#LOGIN
+
+@app.route('/', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        
+        # Vérification des informations d'identification dans la base de données
+        user = db.users.find_one({"username": username, "password": password})
+        
+        if user:
+            # Si l'utilisateur est trouvé, rediriger vers la page des abonnés
+            return redirect(url_for('home'))
+        else:
+            # Si les informations d'identification sont incorrectes, afficher un message d'erreur
+            error = "Nom d'utilisateur ou mot de passe incorrect"
+            return render_template('login.html', error=error)
+    
+    return render_template('login.html')
+
 #ABONNES
 
-@app.route('/')
+@app.route('/abonnes')
 def home():
-     # return render_template('index.html')
-     abonnes = list(db.abonnes.find({}, {"_id": 0})) 
-     return render_template('index.html', abonnes=abonnes) 
+    abonnes = list(db.abonnes.find({}, {"_id": 0})) 
+    return render_template('index.html', abonnes=abonnes) 
 
 @app.route('/addabonne', methods=[ 'GET','POST'])
 def addAbonnees():
