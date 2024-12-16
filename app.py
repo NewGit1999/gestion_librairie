@@ -30,6 +30,44 @@ def login():
     
     return render_template('login.html')
 
+#CREATION COMPTE
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        first_name = request.form['first_name']
+        last_name = request.form['last_name']
+        telephone= request.form['telephone']
+        username = request.form['username']
+        password = request.form['password']
+        confirm_password = request.form['confirm_password']
+
+        # Vérification du mot de passe
+        if password != confirm_password:
+            error = "Les mots de passe ne correspondent pas."
+            return render_template('register.html', error=error)
+
+        # Vérifier si l'utilisateur existe déjà
+        existing_user = db.users.find_one({"username": username})
+        if existing_user:
+            error = "Ce nom d'utilisateur existe déjà."
+            return render_template('register.html', error=error)
+
+        # Ajout de l'utilisateur dans la base de données
+        db.users.insert_one({
+            "first_name": first_name,
+            "last_name": last_name,
+            "telephone": telephone,
+            "username": username,
+            "password": password,  # Vous pouvez ajouter un hashage ici pour plus de sécurité
+            "role": "admin"
+        })
+
+        # Redirection vers la page de login après inscription réussie
+        return redirect(url_for('login'))
+
+    return render_template('register.html')
+
 #ABONNES
 
 @app.route('/abonnes')
